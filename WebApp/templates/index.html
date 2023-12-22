@@ -1,0 +1,156 @@
+<style>
+    /* Global Styles */
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+    }
+    
+    /* Responsive Design */
+    @media screen and (max-width: 600px) {
+        .container {
+            width: 90%;
+            margin: 0 auto;
+        }
+    
+        nav ul {
+            flex-direction: column;
+            align-items: center;
+        }
+    
+        nav ul li {
+            margin-bottom: 10px;
+        }
+    }
+    
+    /* Navigation Bar */
+    nav {
+        background-color: #333;
+        color: white;
+        padding: 10px 0;
+        text-align: center;
+    }
+    
+    nav ul {
+        list-style-type: none;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+    }
+    
+    nav ul li {
+        margin: 0 20px;
+    }
+    
+    nav ul li a {
+        color: white;
+        text-decoration: none;
+        transition: color 0.3s ease-in-out;
+    }
+    
+    nav ul li a:hover {
+        color: #4caf50;
+    }
+    
+    /* Sections */
+    .container {
+        max-width: 800px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    /* Form Styles */
+    form {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    input[type="text"], textarea {
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+    }
+    
+    input[type="submit"] {
+        background-color: #4caf50;
+        color: #fff;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+    
+    input[type="submit"]:hover {
+        background-color: #45a049;
+    }
+    </style>
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Review Helpfulness Prediction</title>
+    
+        
+    </head>
+    <body>
+        <!-- Navigation Links -->
+        <nav>
+            <ul>
+                <li><a href="#introduction">Intro</a></li>
+                <li><a href="#rf-model">Model Explanation</a></li>
+                <li><a href="#predictor">Predictor</a></li>
+            </ul>
+        </nav>
+    
+            <!-- Introduction Section -->
+        <section id="introduction">
+            <div class="container">
+                <h2>Introduction</h2>
+                <p>Welcome to our innovative web application, designed to revolutionize your experience with movie reviews on Amazon. Our tool, using cutting-edge machine learning technology, predicts the helpfulness of movie reviews, aiding in your decision-making process.
+
+                    Navigating through numerous reviews can be overwhelming. That's why we've developed this application, employing a sophisticated Random Forest model to filter and highlight the most relevant and useful reviews for you. This model stands out for its accuracy and reliability in predictive analytics, making it a perfect fit for our purpose.
+                    
+                    In the next section, we'll delve deeper into the Random Forest model. We'll explore its mechanics, understand why it's an excellent choice for predicting review helpfulness, and discuss the benefits it brings to your movie selection process.
+                    
+                    Join us as we uncover the science behind our application and learn how technology is being used to enhance your experience in selecting movies. Stay tuned for a detailed journey into the world of Random Forest models and their application in our innovative tool.</p>
+                <img src="{{ url_for('static', filename='1.png') }}">
+            </div>
+        </section>
+        <!-- Random Forest Model Explanation Section -->
+        <section id="rf-model">
+            <div class="container">
+                <h2>Our Random Forest Model</h2>
+                <p>Introducing our state-of-the-art Random Forest model—a culmination of extensive training on over 400,000 labeled reviews, meticulously crafted to understand and analyze sentiments with unparalleled accuracy. As the digital landscape burgeons with user-generated content, the ability to accurately gauge customer sentiment becomes paramount for businesses aiming to enhance their services and products. Our Random Forest model stands as a beacon of reliability, boasting an impressive accuracy of 80% and an F1 Score of 68%, outshining conventional models in precision and recall.
+
+                    Our model excels not just in numerical benchmarks, but in its nuanced understanding of text, adeptly distinguishing between positive and negative feedback. This proficiency is echoed in the ROC curves, where our model achieves an AUC of 0.88, indicating a superior ability to classify reviews correctly. Such prowess stems from rigorous training and fine-tuning processes involving a vast dataset of reviews, enabling our model to grasp the subtlest of sentiments expressed across various contexts. Engage with our Random Forest model to unlock actionable insights from customer feedback and steer your business strategies with data-driven confidence.</p>
+                <img src="{{ url_for('static', filename='2.png') }}" alt="Model Accuracy Table">
+                <img src="{{ url_for('static', filename='3.png') }}" alt="ROC Curves">
+            </div>
+        </section>
+        <section id="predictor">
+            <h1>Review Prediction</h1>
+            <form method="post" action="/">
+                <label for="score">Score:</label>
+                <input type="text" name="score" required><br>
+    
+                <label for="summary">Summary:</label>
+                <textarea name="summary" required></textarea><br>
+    
+                <label for="text">Text:</label>
+                <textarea name="text" required></textarea><br>
+    
+                <input type="submit" value="Predict!">
+            </form>
+        {% if result %}
+            <h2>Result: {{ result }}</h2>
+        {% endif %}
+    </body>
+    </html>
+    
