@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Review Analyzer</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h2>Realtime Analysis</h2>
+    <button id="run-api">Run API</button>
+    <div id="api-result"></div>
+
+    <button id="run-predictions">Run Predictions</button>
+    <div id="predictions-result"></div>
+
+    <script>
+        $(document).ready(function() {
+            $('#run-api').click(function() {
+                $.post('/run_api', function(data) {
+                    $('#api-result').html('Total Reviews from Rapid API: ' + data.total_reviews);
+                });
+            });
+
+            $('#run-predictions').click(function() {
+                $.post('/run_predictions', function(data) {
+                    displayPredictions(data);
+                });
+            });
+
+            function displayPredictions(data) {
+                var container = $('#predictions-result');
+                container.empty();
+
+                container.append('<h3>Predictions:</h3>');
+                container.append('<div>Total Helpful Reviews: ' + data.total_0_predictions + '</div>');
+
+
+                data.reviews_0_predictions.forEach(function(review, index) {
+                    container.append('<div class="review-summary" id="summary0-' + index + '">Review ' + (index + 1) + ' (Rating: ' + review.score + '): ' + review.summary + '</div>');
+                    container.append('<div class="review-text" id="text0-' + index + '">' + review.text + '</div>');
+                });
+                container.append('<div>Total Unhelpful Reviews: ' + data.total_1_predictions + '</div>');
+                data.reviews_1_predictions.forEach(function(review, index) {
+                    container.append('<div class="review-summary" id="summary1-' + index + '">Review ' + (index + 1) + ' (Rating: ' + review.score + '): ' + review.summary + '</div>');
+                    container.append('<div class="review-text" id="text1-' + index + '">' + review.text + '</div>');
+                });
+
+                $('.review-summary').click(function() {
+                    var id = $(this).attr('id').replace('summary', 'text');
+                    $('#' + id).toggle();
+                });
+            }
+        });
+    </script>
+</body>
+</html>

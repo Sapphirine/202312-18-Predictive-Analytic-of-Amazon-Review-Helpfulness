@@ -1,0 +1,73 @@
+/* General styling */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f0f0f0;
+  margin: 0;
+  padding: 0;
+  color: #333;
+  line-height: 1.6;
+}
+
+/* Header styles */
+h2 {
+  background-color: #4CAF50;
+  color: #fff;
+  text-align: center;
+  padding: 20px 0;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.4);
+}
+
+/* Button styles */
+button {
+  background-color: #333;
+  color: #fff;
+  border: 0;
+  border-radius: 5px;
+  padding: 10px 20px;
+  margin: 10px 0;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #555;
+}
+
+/* Container styles */
+#api-result, #predictions-result {
+  margin: 20px;
+  padding: 15px;
+  border-radius: 8px;
+  background-color: #fff;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+/* Review summary styles */
+.review-summary {
+  cursor: pointer;
+  font-weight: bold;
+  margin-top: 10px;
+  color: #4CAF50;
+}
+
+/* Review text styles */
+.review-text {
+  display: none;
+  margin-top: 5px;
+  padding: 10px;
+  background-color: #f9f9f9;
+  border-left: 4px solid #4CAF50;
+}
+
+/* Responsive design */
+@media (max-width: 600px) {
+  body {
+      padding: 5px;
+  }
+
+  h2, button, #api-result, #predictions-result {
+      margin-left: 5px;
+      margin-right: 5px;
+  }
+}
